@@ -200,7 +200,7 @@ def get_task_list(project):
 
             #print(actual_list)
 
-            return(actual_list)
+            return(actual_list,project)
 
  
 
@@ -218,7 +218,7 @@ def get_task_list(project):
 
 window = Tk()
 
-window.geometry("600x400")
+window.geometry("900x600")
 
  
 
@@ -230,9 +230,11 @@ def action():
 
     for i in range(50):
 
-        Label(window,text= '                                                           ').grid(row=10+i,column=1)
+        Label(window,text= '                                                                   ').grid(row=10+i,column=1)
 
-        Label(window,text= '                                                           ').grid(row=10+i,column=3)
+        Label(window,text= '                                                                   ').grid(row=10+i,column=3)
+
+        Label(window,text='                                                                    ').grid(row=10+i,column=5)
 
  
 
@@ -314,7 +316,7 @@ def action():
                     #print('the weekly task',weekly_task_list)
 
                     last=the_last(shift,weekly_task_list,date)
-                    print(last)
+                    #print(last)
 
                     n=0
 
@@ -322,17 +324,21 @@ def action():
 
                     sc=last[1]
 
+                    pc = last[2]
+
                     for i in range(len(fc)):
 
                         Label(window,text=fc[i]).grid(row=i+10,column=1)
 
                         Label(window,text=sc[i]).grid(row=i+10,column=3)
 
+                        Label(window,text=pc[i]).grid(row=i+10,column=5)
+
 
 def the_last(shift,weelky_task_list,date):
 
     timings = []
-
+    proj = []
     tasks = []
     the_task = ''
  
@@ -350,6 +356,7 @@ def the_last(shift,weelky_task_list,date):
     
 
     for v in task_list:
+
        
         #print('fhuisdgvrevbfuidovhfuidvh',v)
 
@@ -357,13 +364,17 @@ def the_last(shift,weelky_task_list,date):
 
             #print('yes')
 
-            timings.append('No Data for the Project of '),tasks.append(v[1])
+            timings.append('No Data for the Project of '),tasks.append(v[1]),proj.append(v[1])
 
             continue
 
+        
         else:
 
-             for i in range(7):
+            vi = v[0]
+            p = v[1]
+
+            for i in range(7):
 
                 if day_of_week==week[i]:
 
@@ -371,13 +382,13 @@ def the_last(shift,weelky_task_list,date):
 
                     #print('kes see',v)
 
-                    the_task = v[i]
+                    the_task = vi[i]
 
                     #print('the Task are ',the_task)
 
         if shift == 'WO' or shift =='L':
 
-            timings.append('NONE') , tasks.append('OFF')
+            timings.append('NONE') , tasks.append('OFF') , proj.append(p)
            
 
         elif shift=='M':   
@@ -390,7 +401,7 @@ def the_last(shift,weelky_task_list,date):
 
                         if k< datetime.time(15,45) and k>datetime.time(7,0):
 
-                           timings.append(k), tasks.append(v)
+                           timings.append(k), tasks.append(v) , proj.append(p)
 
      
     
@@ -406,7 +417,7 @@ def the_last(shift,weelky_task_list,date):
 
                         if k> datetime.time(15,45) and k<datetime.time(22,0):
 
-                            timings.append(k), tasks.append(v)
+                            timings.append(k), tasks.append(v), proj.append(p)
 
                             #print(tasks)
 
@@ -422,13 +433,15 @@ def the_last(shift,weelky_task_list,date):
 
                         if k< datetime.time(23,45) and k>datetime.time(22,0):
 
-                            timings.append(k), tasks.append(v)
+                            timings.append(k), tasks.append(v),proj.append(p)
+
 
                        
 
                         if k> datetime.time(0,0) and k<datetime.time(7,0):
 
-                            timings.append(k), tasks.append(v)
+                            timings.append(k), tasks.append(v),proj.append(p)
+
 
      
 
@@ -436,7 +449,7 @@ def the_last(shift,weelky_task_list,date):
 
         #z=zip(timings,tasks)
        #print("jyfuy",tasks) 
-       return timings,tasks
+       return timings,tasks,proj
 
 
 user_id_selected = StringVar()
