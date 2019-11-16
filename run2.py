@@ -226,8 +226,16 @@ user_detail = []
 
  
 
-def action():
 
+def notif(last):
+    print(last)
+    
+
+
+
+
+def action():
+    
     for i in range(50):
 
         Label(window,text= '                                                                   ').grid(row=10+i,column=1)
@@ -333,6 +341,8 @@ def action():
                         Label(window,text=sc[i]).grid(row=i+10,column=3)
 
                         Label(window,text=pc[i]).grid(row=i+10,column=5)
+
+                    Notification = Button(window,text="Set Notification for "+str(got_uid),command = lambda: notif(last)).grid(row=i+15,column=3)
 
 
 def the_last(shift,weelky_task_list,date):
@@ -476,6 +486,8 @@ Label(window,text = "Select User").grid(row =1,column=1)
 
 Label(window,text="Select date of current month").grid(row=2,column=1)
 
+Label(window,text=' Turn on Notification').grid(row=3,column=1)
+
 user_id = ttk.Combobox(window,width=8, textvariable=user_id_selected, value=the_user,state='readonly')
 
  
@@ -500,26 +512,41 @@ m.grid(row=2, column=3)
 
 y.grid(row=2, column=4)
 
- 
 
  
 
- 
-
- 
-
- 
-
- 
 
 user_id.grid(row=1,column=2)
-
- 
-
  
 
 submit = Button(window,text="Submit",command =action).grid(row=6,column=2)
 
- 
+
 
 window.mainloop()
+
+
+
+
+
+#tkinter messagebox code--------------------------------------------------------
+
+'''
+
+import Tkinter
+import tkMessageBox
+
+top = Tkinter.Tk()
+def hello():
+   tkMessageBox.showinfo("Say Hello", "Hello World")
+
+B1 = Tkinter.Button(top, text = "Say Hello", command = hello)
+B1.pack()
+
+top.mainloop()
+
+# tkinter running a job code
+
+
+
+'''
