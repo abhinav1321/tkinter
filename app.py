@@ -228,10 +228,10 @@ def notif(last):
             f.write(to_enter + ',')
 
             f.close()
+    print("this")
+    Label(window, text="Info Sent to Task Scheduler").grid(row=5, column=5)
 
-    Label(window, text="Info Sent to Task Scheduler").grid(row=15, column=5)
-
-    os.system('python notif.py')
+    os.system('python notification.py')
 
 
 def action():
